@@ -3,8 +3,10 @@ package DAO;
 import DAO.Interfaces.dao;
 import Hibernate.Util.Hibernate.Util;
 import entities.Admin;
+import entities.Produit;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -12,20 +14,33 @@ import java.util.function.Consumer;
 public class baseDAO<T> {
     public static EntityManager entityManager = Util.getEntityManager();
 
-    public void save(T t){
-        executeInsideTransaction(entityManager1 -> entityManager.persist(t));
+    public Boolean save(T t){
+        if(executeInsideTransaction(entityManager1 -> entityManager.persist(t))){
+            return true;
+        }
+            return false;
     }
-    public static void executeInsideTransaction(Consumer<EntityManager> action) {
+    public Boolean update(T t){
+        if(executeInsideTransaction(entityManager1 -> entityManager.merge(t))){
+            return true;
+        }
+        return false;
+    }
+
+    public static Boolean executeInsideTransaction(Consumer<EntityManager> action) {
         EntityTransaction tx = entityManager.getTransaction();
         try {
             tx.begin();
             action.accept(entityManager);
             tx.commit();
+            return true;
         }
         catch (RuntimeException e) {
             tx.rollback();
-            throw e;
+//            throw e;
+            return false;
         }
     }
+
 
 }

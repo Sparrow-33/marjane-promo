@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -28,7 +29,7 @@ public class Promotion {
     private Long profit;
     @Basic
     @Column(name = "taux")
-    private Long taux;
+    private Float taux;
     @Basic
     @Column(name = "status")
     private String status;
@@ -48,15 +49,15 @@ public class Promotion {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt() {
+        this.createdAt = new Timestamp(new Date().getTime());
     }
 
     public Integer getProduitId() {
         return produitId;
     }
 
-    public void setProduitId(Integer produitId) {
+    public void setProduitId(int produitId) {
         this.produitId = produitId;
     }
 
@@ -68,11 +69,11 @@ public class Promotion {
         this.profit = profit;
     }
 
-    public Long getTaux() {
+    public float getTaux() {
         return taux;
     }
 
-    public void setTaux(Long taux) {
+    public void setTaux(Float taux) {
         this.taux = taux;
     }
 
@@ -85,11 +86,11 @@ public class Promotion {
         Promotion promotion = (Promotion) o;
 
         if (id != promotion.id) return false;
-        if (createdAt != null ? !createdAt.equals(promotion.createdAt) : promotion.createdAt != null) return false;
-        if (produitId != null ? !produitId.equals(promotion.produitId) : promotion.produitId != null) return false;
-        if (profit != null ? !profit.equals(promotion.profit) : promotion.profit != null) return false;
+        if (!Objects.equals(createdAt, promotion.createdAt)) return false;
+        if (!Objects.equals(produitId, promotion.produitId)) return false;
+        if (!Objects.equals(profit, promotion.profit)) return false;
         if (!Objects.equals(taux, promotion.taux)) return false;
-        if(!Objects.equals(status,promotion.status)) return false;
+        if (!Objects.equals(status,promotion.status)) return false;
 
 
         return true;
