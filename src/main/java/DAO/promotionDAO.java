@@ -1,6 +1,5 @@
 package DAO;
 
-import entities.Produit;
 import entities.Promotion;
 import jakarta.persistence.Query;
 

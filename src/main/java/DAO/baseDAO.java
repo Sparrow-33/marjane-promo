@@ -1,14 +1,8 @@
 package DAO;
 
-import DAO.Interfaces.dao;
 import Hibernate.Util.Hibernate.Util;
-import entities.Admin;
-import entities.Produit;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Query;
-
-import java.util.List;
 import java.util.function.Consumer;
 
 public class baseDAO<T> {
@@ -17,14 +11,12 @@ public class baseDAO<T> {
     public Boolean save(T t){
         if(executeInsideTransaction(entityManager1 -> entityManager.persist(t))){
             return true;
-        }
-            return false;
+        }   return false;
     }
     public Boolean update(T t){
         if(executeInsideTransaction(entityManager1 -> entityManager.merge(t))){
             return true;
-        }
-        return false;
+        }   return false;
     }
 
     public static Boolean executeInsideTransaction(Consumer<EntityManager> action) {
