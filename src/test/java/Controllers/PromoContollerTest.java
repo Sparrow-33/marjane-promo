@@ -9,7 +9,7 @@ class PromoContollerTest {
     @Test
     void getPromoByStatus(){
         String status = "PEND";
-        assertNull(PromoContoller.getAllPromoByStatus(status));
+        assertNull(PromoController.getAllPromoByStatus(status));
     }
 
 }

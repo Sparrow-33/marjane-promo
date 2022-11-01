@@ -8,6 +8,8 @@ import java.util.List;
 public class promotionDAO extends baseDAO<Promotion>{
 
     public Boolean setPromotion(int produitID, long profit, float taux, String status, Promotion promotion){
+
+
         promotionDAO promotionDAO = new promotionDAO();
         promotion.setProduitId(produitID);
         promotion.setProfit(profit);
@@ -37,5 +39,16 @@ public class promotionDAO extends baseDAO<Promotion>{
         }else{
             return false;
         }
+    }
+    public Boolean rejectPromo(Integer id,promotionDAO promotionDAO){
+        Promotion promotion = get(id);
+        promotion.setStatus("REJECT");
+        if (promotionDAO.update(promotion)){
+            return true;
+        }else{
+            return false;
+        }
+
+
     }
 }
