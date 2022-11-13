@@ -17,7 +17,7 @@ public class Admin {
     @Basic
     @Column(name = "password")
     private String password;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "centre_id", referencedColumnName = "id",insertable = false,updatable = false)
     private Centre centreByCentreId;
 

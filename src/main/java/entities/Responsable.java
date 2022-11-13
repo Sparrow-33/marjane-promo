@@ -1,8 +1,14 @@
 package entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class Responsable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,9 +21,18 @@ public class Responsable {
     @Column(name = "email")
     private String email;
     @Basic
+    @Column(name = "password")
+    private String password;
+    @Basic
     @Column(name = "nom")
     private String nom;
+    @Basic
+    @Column(name = "centreId")
+    private Integer centreId;
     @ManyToOne
+    @JoinColumn(name = "centreId", referencedColumnName = "id",insertable = false, updatable = false)
+    private Centre responsableByCentreId;
+    @OneToOne
     @JoinColumn(name = "categorie_id", referencedColumnName = "id",insertable = false,updatable = false)
     private Categorie categorieByCategorieId;
 
@@ -61,9 +76,11 @@ public class Responsable {
         Responsable that = (Responsable) o;
 
         if (id != that.id) return false;
-        if (categorieId != null ? !categorieId.equals(that.categorieId) : that.categorieId != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
+        if (!Objects.equals(categorieId, that.categorieId)) return false;
+        if (!Objects.equals(centreId, that.centreId)) return false;
+        if (!Objects.equals(email, that.email)) return false;
+        if (!Objects.equals(password, that.password)) return false;
+        if (!Objects.equals(nom, that.nom)) return false;
 
         return true;
     }
@@ -72,7 +89,9 @@ public class Responsable {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (categorieId != null ? categorieId.hashCode() : 0);
+        result = 31 * result + (centreId != null ? centreId.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         return result;
     }

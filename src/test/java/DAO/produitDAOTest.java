@@ -7,11 +7,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 class produitDAOTest {
+    produitDAO p = new produitDAO();
     @Test
     void getAllProducts(){
-//        produitDAO produitDAO = new produitDAO();
-//        List<Produit> list =produitDAO.getAllProducts();
-//        assertEquals(list ,list);
+        List<Produit> list =p.getAll();
+        int i =0;
+        while (i < list.size()) {
+            System.out.println(list.get(i).getCategorieByCategorieId().getType());
+            i++;
+        }
     }
 
 }

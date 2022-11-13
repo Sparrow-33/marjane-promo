@@ -20,13 +20,14 @@
                 </div>
                 <div class="w-full max-w-sm mx-auto overflow-hidden bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-lg shadow-md dark:bg-gray-800">
                     <div class="px-6 py-4">
-<%--                        <h2 class="text-3xl font-bold text-center text-gray-700 dark:text-white">Brand</h2>--%>
                         <div x-data="{ isOpen: true }" class="flex items-center">
 
                             <div class="relative">
                                 <!-- Menu toggle button -->
-                                <button @click="isOpen = !isOpen" class="relative ml-56 mb-5 z-10 block p-2 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                                   votre poste
+                                <button @click="isOpen = !isOpen" class="relative ml-72 mb-5 z-10 block p-2 text-white transition-colors duration-300 transform bg-gray-400 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                    </svg>
                                 </button>
 
                                 <!-- Menu list -->
@@ -47,20 +48,20 @@
                             </div>
                         </div>
                     <div>
-                        <p class="mt-1 text-center text-gray-500 dark:text-gray-400">Admin General</p>
+<%--                        <p class="mt-1 text-center font-semibold text-gray-500 dark:text-gray-400">Admin General</p>--%>
+                        <p class="mt-1 text-center font-semibold text-gray-500 dark:text-gray-400">Admin </p>
 
-                        <form class="relative z-0">
+<%--                        <form class="relative z-0" method="post" action="login.adminGeneral">--%>
+                        <form class="relative z-0" method="post" action="login.admin">
+
                             <div class="w-full mt-4">
-                                <input class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="email" placeholder="Email Address" aria-label="Email Address" />
+                                <input class="block w-full px-4 py-2 mt-2 text-gray-700  bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="email" name="email" placeholder="Email Address" aria-label="Email Address" />
                             </div>
-
                             <div class="w-full mt-4">
-                                <input class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="password" placeholder="Password" aria-label="Password" />
+                                <input class="block w-full px-4 py-2 mt-2 text-gray-700  bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="password" name="password" placeholder="Password" aria-label="Password" />
                             </div>
-
-                            <div class="flex items-center justify-between mt-4">
-
-                                <button class="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-blue-500 rounded hover:bg-gray-600 focus:outline-none" type="button">connexion</button>
+                            <div class="flex items-center justify-center mt-4">
+                                <button type="submit" class="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-blue-700 rounded hover:bg-gray-600 focus:outline-none" >connexion</button>
                             </div>
                         </form>
                     </div>

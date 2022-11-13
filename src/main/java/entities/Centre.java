@@ -1,10 +1,14 @@
 package entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collection;
 
 @Entity
+@Setter
+@Getter
 public class Centre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,8 +20,11 @@ public class Centre {
     @Basic
     @Column(name = "ville")
     private String ville;
-    @OneToMany(mappedBy = "centreByCentreId")
-    private Collection<Admin> adminsById;
+    @OneToOne(mappedBy = "centreByCentreId")
+    private Admin adminById;
+
+    @OneToMany(mappedBy = "responsableByCentreId")
+    private Collection<Responsable> responsablesId;
 
     public long getId() {
         return id;
@@ -65,11 +72,11 @@ public class Centre {
         return result;
     }
 
-    public Collection<Admin> getAdminsById() {
-        return adminsById;
+    public Admin getAdminsById() {
+        return adminById;
     }
 
-    public void setAdminsById(Collection<Admin> adminsById) {
-        this.adminsById = adminsById;
+    public void setAdminsById(Admin adminById) {
+        this.adminById = adminById;
     }
 }

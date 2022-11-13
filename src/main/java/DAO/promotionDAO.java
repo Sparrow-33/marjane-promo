@@ -3,11 +3,13 @@ package DAO;
 import entities.Promotion;
 import jakarta.persistence.Query;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class promotionDAO extends baseDAO<Promotion>{
 
-    public Boolean setPromotion(int produitID, long profit, float taux, String status, Promotion promotion){
+    public Boolean setPromotion(int produitID, long profit, float taux, String status, Promotion promotion, LocalDate expiration){
 
 
         promotionDAO promotionDAO = new promotionDAO();
@@ -15,6 +17,7 @@ public class promotionDAO extends baseDAO<Promotion>{
         promotion.setProfit(profit);
         promotion.setTaux(taux);
         promotion.setStatus(status);
+        promotion.setExpired_at(expiration);
         if(promotionDAO.save(promotion)){
             return true;
         }else{

@@ -15,8 +15,8 @@ public class Categorie {
     private String type;
     @OneToMany(mappedBy = "categorieByCategorieId")
     private Collection<Produit> produitsById;
-    @OneToMany(mappedBy = "categorieByCategorieId")
-    private Collection<Responsable> responsablesById;
+    @OneToOne(mappedBy = "categorieByCategorieId")
+    private Responsable responsablesById;
 
     public long getId() {
         return id;
@@ -62,11 +62,11 @@ public class Categorie {
         this.produitsById = produitsById;
     }
 
-    public Collection<Responsable> getResponsablesById() {
+    public Responsable getResponsablesById() {
         return responsablesById;
     }
 
-    public void setResponsablesById(Collection<Responsable> responsablesById) {
+    public void setResponsablesById(Responsable responsablesById) {
         this.responsablesById = responsablesById;
     }
 }

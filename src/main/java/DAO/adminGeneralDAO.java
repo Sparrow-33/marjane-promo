@@ -1,18 +1,13 @@
 package DAO;
-
 import Services.PasswordManager;
 import entities.Admin;
 import entities.Admingeneral;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-public class adminGeneralDAO extends baseDAO<Admingeneral>{
-    public static void createAdmin(adminDAO adminDAO){
-        Admin admin = new Admin();
-        admin.getEmail();
-        admin.getPassword();
-        admin.getCentreId();
-        adminDAO.save(admin);
-    }
 
+import static java.lang.System.out;
+
+public class adminGeneralDAO extends baseDAO<Admingeneral>{
 
     public static Admingeneral findByEmail(String email){
         TypedQuery<Admingeneral> query = entityManager.createQuery("SELECT e FROM Admingeneral e WHERE e.email = :email",Admingeneral.class);
@@ -22,24 +17,27 @@ public class adminGeneralDAO extends baseDAO<Admingeneral>{
 
     public Boolean signIn(String email,String password){
         adminGeneralDAO adminGeneralDAO = new adminGeneralDAO();
-        Admingeneral admingeneral =  adminGeneralDAO.findByEmail(email);
+        try {
+            Admingeneral admingeneral =  adminGeneralDAO.findByEmail(email);
+            if(PasswordManager.passwordVerify(password,admingeneral.getPassword())){
+                return true;
+            }else {
+                out.println("password mismatch!");
+                return false;
+            }
 
-        if(PasswordManager.passwordVerify(password,admingeneral.getPassword())){
-            System.out.println(admingeneral.toString());
-            return true;
-        }else {
-            System.out.println("password mismatch!");
+        }catch (NoResultException e){
             return false;
         }
     }
 
-    public  void createAdmin(String email, String password, int centreID){
+    public  boolean createAdmin(String email, String password, int centreID){
         adminDAO adminDAO = new adminDAO();
         Admin admin = new Admin();
         admin.setEmail(email);
         admin.setPassword(PasswordManager.passwordEncrypt(password));
         admin.setCentreId(centreID);
-        adminDAO.save(admin);
+        return ( adminDAO.save(admin)) ? true : false;
     }
 
 }

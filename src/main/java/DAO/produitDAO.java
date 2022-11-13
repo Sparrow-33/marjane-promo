@@ -1,7 +1,9 @@
 package DAO;
 
+import entities.Categorie;
 import entities.Produit;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class produitDAO extends baseDAO<Produit>  {
     }
 
     public  List<Produit> getAll() {
-        Query query = entityManager.createQuery("from Produit", Produit.class);
+        TypedQuery<Produit> query = entityManager.createQuery("from Produit",Produit.class);
         return query.getResultList();
     }
 
@@ -21,7 +23,6 @@ public class produitDAO extends baseDAO<Produit>  {
          query.setParameter(1,catId);
          return query.getResultList();
     }
-
 
 
 

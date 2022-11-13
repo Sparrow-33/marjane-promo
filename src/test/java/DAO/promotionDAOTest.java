@@ -4,6 +4,8 @@ import entities.Produit;
 import entities.Promotion;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +16,8 @@ class promotionDAOTest {
     @Test
     void setPromotion(){
         Promotion promotion = new Promotion();
-        assertEquals(true,promotionDAO.setPromotion(5,2,0.2f,"PEND",promotion));
-        System.out.println("TEst");
+        LocalDate date = LocalDate.now();
+        assertEquals(true,promotionDAO.setPromotion(5,2,20,"PEND",promotion, date));
     }
 
     @Test

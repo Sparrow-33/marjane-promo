@@ -33,7 +33,7 @@
         <div class="px-4 py-2 -mx-3">
             <div class="mx-3">
                 <span class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
-                <p class="text-sm text-gray-600 dark:text-gray-200">Your account was registered!</p>
+                <p class="text-sm text-gray-600 dark:text-gray-200">${message}</p>
             </div>
         </div>
     </div>
@@ -41,15 +41,15 @@
 <%-- alert end--%>
 <div :class="{'absolute h-full w-full bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 z-30': modelOpen}"></div>
   <div class="flex items-start justify-between ">
-    <div class="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80">
+    <div class="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80 ">
       <div class="bg-white h-full rounded-2xl dark:bg-gray-700">
         <div class="flex items-center justify-center pt-6">
             <img src="../images/logo_marjane.svg" class="h-24" alt="">
         </div>
-        <nav class="mt-6">
+        <nav class="mt-6 ">
           <div>
             <button @click ="displayPromo = false, index = true"
-                    class="w-full font-thin uppercase text-blue-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800 border-r-4 border-blue-500" href="#">
+                    class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800 " href="#">
                             <span class="text-left">
                                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
@@ -60,41 +60,33 @@
                                 Dashboard
                             </span>
             </button>
-            <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="#">
+            <a  class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="display.products.admin">
                             <span class="text-left">
-                                <svg width="20" height="20" fill="currentColor" class="m-auto" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1024 1131q0-64-9-117.5t-29.5-103-60.5-78-97-28.5q-6 4-30 18t-37.5 21.5-35.5 17.5-43 14.5-42 4.5-42-4.5-43-14.5-35.5-17.5-37.5-21.5-30-18q-57 0-97 28.5t-60.5 78-29.5 103-9 117.5 37 106.5 91 42.5h512q54 0 91-42.5t37-106.5zm-157-520q0-94-66.5-160.5t-160.5-66.5-160.5 66.5-66.5 160.5 66.5 160.5 160.5 66.5 160.5-66.5 66.5-160.5zm925 509v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm0-260v-56q0-15-10.5-25.5t-25.5-10.5h-568q-15 0-25.5 10.5t-10.5 25.5v56q0 15 10.5 25.5t25.5 10.5h568q15 0 25.5-10.5t10.5-25.5zm0-252v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm256-320v1216q0 66-47 113t-113 47h-352v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-768v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-352q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1728q66 0 113 47t47 113z">
-                                    </path>
-                                </svg>
+                              <i class="fa-solid fa-shop"></i>
                             </span>
               <span class="mx-4 text-sm font-normal">
-                                Liste des centres
+                                Produits
               </span>
             </a>
             <button @click="modelOpen = true" class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="#">
                 <i class="fa-solid fa-user-plus"></i>
               <span class="mx-4 text-sm font-normal">
-                                Ajouter admin
+                                Responsables
               </span>
             </button>
 
-            <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="#">
-                            <span class="text-left">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
-              <span class="mx-4 text-sm font-normal">
-                                creer promotion
-                            </span>
-            </a>
 
             <button
                     @click ="displayPromo = true, index = false"
                     class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="#">
                 <span class="text-left">
-                    <i class="fa-solid fa-tags"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
                 </span>
-              <span class="mx-4 text-sm font-normal">
-                  status promotions
+              <span class="mx-2 text-sm font-normal">
+                   Promotions
               </span>
             </button>
           </div>
@@ -142,12 +134,12 @@
               </div>
           </header>
       <jsp:include page="/adminGeneral/statistics.jsp"></jsp:include>
-      <jsp:include page="/adminGeneral/displayPromo.jsp"></jsp:include>
+      <jsp:include page="/admin/displayPromo.jsp"></jsp:include>
 
       </div>
 
       <%--  Modal start   --%>
-      <jsp:include page="/adminGeneral/createAdmin.jsp"></jsp:include>
+      <jsp:include page="/admin/createResponsable.jsp"></jsp:include>
       <%--  Modal end   --%>
 
   </div>
