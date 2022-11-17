@@ -17,7 +17,7 @@ class promotionDAOTest {
     void setPromotion(){
         Promotion promotion = new Promotion();
         LocalDate date = LocalDate.now();
-        assertEquals(true,promotionDAO.setPromotion(5,2,20,"PEND",promotion, date));
+        assertEquals(true,promotionDAO.setPromotion(5,2,20, date));
     }
 
     @Test
@@ -34,9 +34,17 @@ class promotionDAOTest {
 
     @Test
     void updateStatus(){
-         assertEquals(true,promotionDAO.updatePromoStatus(1,"REJECTED",promotionDAO));
+         assertEquals(true,promotionDAO.updatePromoStatus(1,"REJ"));
     }
 
-
+     @Test
+    void getPromoByCat(){
+        List<Promotion> promotions = promotionDAO.getPromoByCat(1);
+         int i =0;
+         while (i < promotions.size()) {
+             System.out.println(promotions.get(i).getStatus());
+             i++;
+         }
+     }
 
 }

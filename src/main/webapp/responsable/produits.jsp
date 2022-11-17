@@ -1,10 +1,9 @@
-<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
-<jsp:include page="../components/head.jsp"></jsp:include>
+<jsp:include page="/components/head.jsp"></jsp:include>
 <style>
     /*Overrides for Tailwind CSS */
 
@@ -99,10 +98,11 @@
 <body>
 <main  x-data=" {
        modelOpen: false,
+       displayPromo: false,
        index : true,
        alert : true
                 }"
-       class="bg-gray-50 dark:bg-gray-800 rounded-2xl h-screen  relative ">
+       class="bg-gray-50 dark:bg-gray-800 rounded-2xl h-screen overflow-hidden relative ">
 
     <%-- alert start--%>
     <c:if test="${status == true }">
@@ -133,14 +133,14 @@
     <div :class="{'absolute h-full w-full bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 z-30': modelOpen}"></div>
 
     <div class="flex items-start justify-between ">
-          <jsp:include page="../components/sideBar.jsp"></jsp:include>
+        <jsp:include page="components/sideBar.jsp"></jsp:include>
         <div class="flex flex-col w-full md:space-y-4">
-           <jsp:include page="../components/header.jsp"></jsp:include>
+            <jsp:include page="components/header.jsp"></jsp:include>
             <div style="width: 100%;" class="container w-full md:w-4/5  mx-auto px-2">
 
                 <!--Title-->
-                <h1 class="flex items-center bg-white shadow-sm rounded font-sans font-bold break-normal  px-5 text-blue-700 py-4 mb-5 text-xl md:text-2xl">
-                    Liste des promotion
+                <h1 class="flex items-center bg-white shadow-sm rounded font-sans font-bold break-normal  px-5 text-blue-500 py-8 mb-10 text-xl md:text-2xl">
+                    Liste des produits
                 </h1>
 
 
@@ -148,52 +148,26 @@
                 <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
 
-                    <table id="example" class="stripe hover" style="width:100%; display: block; height: 200px; padding-top: 1em; overflow: scroll;  padding-bottom: 1em;">
-                        <thead style="position: sticky;">
+                    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                        <thead>
                         <tr>
-                            <th data-priority="1">Date de creation</th>
-                            <th data-priority="2">Categorie</th>
-                            <th data-priority="3">Produit</th>
-                            <th data-priority="4">Prix unitaire DH</th>
-                            <th data-priority="5">En promotion DH</th>
-                            <th data-priority="6">Fidelite</th>
-                            <th data-priority="7">Date d'expiration</th>
-                            <th data-priority="8">Etat</th>
+                            <th data-priority="1">Categorie</th>
+                            <th data-priority="2">Produit</th>
+                            <th data-priority="3">Prix unitaire DH</th>
+                            <th data-priority="4">Stock</th>
+                            <th data-priority="5">Valeur du produit DH</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="promotion" items="${promotions}">
+                        <c:forEach var="produit" items="${produits}">
                             <tr>
-                                <td>---</td>
-                                <td>${promotion.produitByProduitId.categorieByCategorieId.type}</td>
-                                <td>${promotion.produitByProduitId.label}</td>
-                                <td>${promotion.getProduitByProduitId().getPrix()}</td>
-                                <td>${promotion.getProduitByProduitId().getPrix() - (promotion.getProduitByProduitId().getPrix()* promotion.taux / 100 ) }</td>
-                                <td>${promotion.profit}</td>
-                                <td>${promotion.expired_at}</td>
-                                <td>
-<%--                                    <c:if test="${promotion.status.equals('PEND')}">--%>
-                                    <div style="
-                                    background: <c:if test="${promotion.status.equals('APP')}"> #10b981</c:if>
-                                                <c:if test="${promotion.status.equals('ENC')}"> #0891b2</c:if>
-                                                <c:if test="${promotion.status.equals('NOT')}"> #fde68a</c:if>
-                                                <c:if test="${promotion.status.equals('REJ')}"> #f87171</c:if>;"
-                                    class="flex  w-full max-w-sm overflow-hidden text-white rounded-full py-1">
-                                        <div>
-                                            <div class="mx-3">
-                                                <span style="font-size: 0.6em;" class="font-bold  text-sm">
-                                                    <c:if test="${promotion.status.equals('APP')}"> APPLIQUEE</c:if>
-                                                    <c:if test="${promotion.status.equals('ENC')}"> E.COURS</c:if>
-                                                    <c:if test="${promotion.status.equals('NOT')}"> N.TRAITEE</c:if>
-                                                    <c:if test="${promotion.status.equals('REJ')}"> REJETEE</c:if>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <td>${produit.getCategorieByCategorieId().getType()}</td>
+                                <td>${produit.getLabel()}</td>
+                                <td>${produit.getPrix()}</td>
+                                <td>${produit.getStock()}</td>
+                                <td>${produit.getPrix() * produit.getStock()}</td>
 
-                                </td>
                             </tr>
-
                         </c:forEach>
                         <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
 
@@ -218,9 +192,6 @@
                 });
             </script>
         </div>
-        <%--  Modal start   --%>
-        <jsp:include page="/admin/createResponsable.jsp"></jsp:include>
-        <%--  Modal end   --%>
     </div>
 </main>
 

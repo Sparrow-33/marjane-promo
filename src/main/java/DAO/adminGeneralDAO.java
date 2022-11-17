@@ -1,4 +1,5 @@
 package DAO;
+import Services.Mail;
 import Services.PasswordManager;
 import entities.Admin;
 import entities.Admingeneral;
@@ -15,19 +16,19 @@ public class adminGeneralDAO extends baseDAO<Admingeneral>{
         return query.getSingleResult();
     }
 
-    public Boolean signIn(String email,String password){
+    public Admingeneral signIn(String email,String password){
         adminGeneralDAO adminGeneralDAO = new adminGeneralDAO();
         try {
             Admingeneral admingeneral =  adminGeneralDAO.findByEmail(email);
             if(PasswordManager.passwordVerify(password,admingeneral.getPassword())){
-                return true;
+                return admingeneral;
             }else {
                 out.println("password mismatch!");
-                return false;
+                return null;
             }
 
         }catch (NoResultException e){
-            return false;
+            return null;
         }
     }
 
@@ -37,7 +38,12 @@ public class adminGeneralDAO extends baseDAO<Admingeneral>{
         admin.setEmail(email);
         admin.setPassword(PasswordManager.passwordEncrypt(password));
         admin.setCentreId(centreID);
-        return ( adminDAO.save(admin)) ? true : false;
+
+        if (Mail.sendMail("Cher administrateur , voici vos donnees de connexion sur la platforme Marjane \n Email: " + email + "Bien cordialement", "Marjane espace employe", email)) {
+            return (adminDAO.save(admin)) ? true : false;
+        } else {
+            return false;
+        }
     }
 
 }

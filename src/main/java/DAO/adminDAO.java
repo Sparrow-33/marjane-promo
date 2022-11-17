@@ -16,35 +16,34 @@ public class adminDAO extends baseDAO<Admin> {
         return query.getSingleResult();
     }
 
-    public Boolean signIn(String email,String password){
+    public Admin signIn(String email,String password){
         adminGeneralDAO adminGeneralDAO = new adminGeneralDAO();
         try {
             Admin admin =  adminDAO.findByEmail(email);
             if(PasswordManager.passwordVerify(password,admin.getPassword())){
-                return true;
+                return admin;
             }else {
                 out.println("password mismatch!");
-                return false;
+                return null;
             }
 
         }catch (NoResultException e){
-            return false;
+            return null;
         }
     }
 
-    public boolean addManager(Integer category,Integer centre ,String email, String password, String name) {
+    public boolean addManager(Integer category,int centre ,String email, String password, String name) {
         password = PasswordManager.passwordEncrypt(password);
         ResponsableDAO responsableDAO = new ResponsableDAO();
         Responsable responsable = new Responsable();
         responsable.setCategorieId(category);
-        responsable.setCentreId(centre);
+        responsable.setCentreId((long) centre);
         responsable.setEmail(email);
         responsable.setPassword(password);
         responsable.setNom(name);
 
         if (Mail.sendMail("Cher responsable rayon , voici vos donnees de connexion sur la platforme Marjane \n Email: " + email + "Bien cordialement", "Marjane espace employe", email)) {
             return (responsableDAO.save(responsable)) ? true : false;
-
         } else {
             return false;
         }

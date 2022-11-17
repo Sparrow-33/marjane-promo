@@ -9,7 +9,7 @@ class adminDAOTest {
 
     @Test
     public void addManager(){
-        assertTrue(admin.addManager(1,2,"manager1@marjane.ma","123456","manager1"));
+        assertTrue(admin.addManager(1,2,"muiugfbne@mozmail.com","123456","manager1"));
     }
 
 }

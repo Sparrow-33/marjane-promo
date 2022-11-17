@@ -2,6 +2,7 @@ package DAO;
 
 import entities.Promotion;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,14 +10,15 @@ import java.util.List;
 
 public class promotionDAO extends baseDAO<Promotion>{
 
-    public Boolean setPromotion(int produitID, long profit, float taux, String status, Promotion promotion, LocalDate expiration){
+    public Boolean setPromotion(int produitID, long profit, float taux, LocalDate expiration){
 
 
         promotionDAO promotionDAO = new promotionDAO();
+        Promotion promotion = new Promotion();
         promotion.setProduitId(produitID);
         promotion.setProfit(profit);
         promotion.setTaux(taux);
-        promotion.setStatus(status);
+        promotion.setStatus("ENC");
         promotion.setExpired_at(expiration);
         if(promotionDAO.save(promotion)){
             return true;
@@ -29,15 +31,20 @@ public class promotionDAO extends baseDAO<Promotion>{
             Query query = entityManager.createQuery("from Promotion ", Promotion.class);
             return query.getResultList();
         }
+    public List<Promotion> getPromoByCat(Integer id) {
+        TypedQuery<Promotion> query = entityManager.createQuery("from Promotion p WHERE p.produitByProduitId.categorieId = :id",Promotion.class);
+        query.setParameter("id",id);
+        return query.getResultList();
+    }
 
     public Promotion get(Integer id) {
         return entityManager.find(Promotion.class, id);
     }
 
-    public Boolean updatePromoStatus(Integer id, String status,promotionDAO promotionDAO){
+    public Boolean updatePromoStatus(Integer id, String status){
         Promotion promotion = get(id);
         promotion.setStatus(status);
-        if (promotionDAO.update(promotion)){
+        if (new promotionDAO().update(promotion)){
             return true;
         }else{
             return false;
@@ -45,7 +52,7 @@ public class promotionDAO extends baseDAO<Promotion>{
     }
     public Boolean rejectPromo(Integer id,promotionDAO promotionDAO){
         Promotion promotion = get(id);
-        promotion.setStatus("REJECT");
+        promotion.setStatus("REJ");
         if (promotionDAO.update(promotion)){
             return true;
         }else{

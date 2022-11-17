@@ -41,100 +41,131 @@
 <%-- alert end--%>
 <div :class="{'absolute h-full w-full bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 z-30': modelOpen}"></div>
   <div class="flex items-start justify-between ">
-    <div class="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80 ">
-      <div class="bg-white h-full rounded-2xl dark:bg-gray-700">
-        <div class="flex items-center justify-center pt-6">
-            <img src="../images/logo_marjane.svg" class="h-24" alt="">
-        </div>
-        <nav class="mt-6 ">
-          <div>
-            <button @click ="displayPromo = false, index = true"
-                    class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800 " href="#">
-                            <span class="text-left">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
-                                    </path>
-                                </svg>
-                            </span>
-              <span class="mx-4 text-sm font-normal">
-                                Dashboard
-                            </span>
-            </button>
-            <a  class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="display.products.admin">
-                            <span class="text-left">
-                              <i class="fa-solid fa-shop"></i>
-                            </span>
-              <span class="mx-4 text-sm font-normal">
-                                Produits
-              </span>
-            </a>
-            <button @click="modelOpen = true" class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="#">
-                <i class="fa-solid fa-user-plus"></i>
-              <span class="mx-4 text-sm font-normal">
-                                Responsables
-              </span>
-            </button>
-
-
-            <button
-                    @click ="displayPromo = true, index = false"
-                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" href="#">
-                <span class="text-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-                </span>
-              <span class="mx-2 text-sm font-normal">
-                   Promotions
-              </span>
-            </button>
-          </div>
-        </nav>
-      </div>
-    </div>
-
+     <jsp:include page="../components/sideBar.jsp"></jsp:include>
       <div class="flex flex-col w-full md:space-y-4">
-          <header class="w-full h-16 z-40 flex items-center justify-between">
-              <div class="block lg:hidden ml-6">
-                  <button class="flex p-2 items-center rounded-full bg-white shadow text-gray-500 text-md">
-                      <svg width="20" height="20" class="text-gray-400" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z">
-                          </path>
-                      </svg>
-                  </button>
-              </div>
-              <div class="relative z-20 flex flex-col justify-end h-full px-3 md:w-full">
-                  <div class="relative p-1 flex items-center w-full space-x-4 justify-end">
-                      <button class="flex p-2 items-center rounded-full text-gray-400 hover:text-gray-700 bg-white shadow text-md">
-                          <svg width="20" height="20" class="" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z">
-                              </path>
-                          </svg>
-                      </button>
-                      <button class="flex p-2 items-center rounded-full bg-white shadow text-gray-400 hover:text-gray-700 text-md">
-                          <svg width="20" height="20" class="text-gray-400" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M912 1696q0-16-16-16-59 0-101.5-42.5t-42.5-101.5q0-16-16-16t-16 16q0 73 51.5 124.5t124.5 51.5q16 0 16-16zm816-288q0 52-38 90t-90 38h-448q0 106-75 181t-181 75-181-75-75-181h-448q-52 0-90-38t-38-90q50-42 91-88t85-119.5 74.5-158.5 50-206 19.5-260q0-152 117-282.5t307-158.5q-8-19-8-39 0-40 28-68t68-28 68 28 28 68q0 20-8 39 190 28 307 158.5t117 282.5q0 139 19.5 260t50 206 74.5 158.5 85 119.5 91 88z">
-                              </path>
-                          </svg>
-                      </button>
-                      <span class="w-1 h-8 rounded-lg bg-gray-200">
-                        </span>
-                      <a href="#" class="block relative">
-                          <img alt="profil" src="/images/person/1.jpg" class="mx-auto object-cover rounded-full h-10 w-10 "/>
-                      </a>
-                      <button class="flex items-center text-gray-500 dark:text-white text-md">
-                          Charlie R
-                          <svg width="20" height="20" class="ml-2 text-gray-400" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z">
-                              </path>
-                          </svg>
-                      </button>
+      <jsp:include page="../components/header.jsp"></jsp:include>
+
+          <div class="overflow-auto h-screen pb-24 px-4 md:px-6"
+               x-show = "index">
+              <h1 class="text-4xl font-semibold text-gray-800 dark:text-white">
+                  Bonjour
+              </h1>
+
+              <div class="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">
+                  <div class="w-full md:w-6/12">
+                      <div class="shadow-sm rounded w-full bg-white dark:bg-gray-700 relative overflow-hidden">
+                          <a href="#" class="w-full h-full block">
+                              <div class="flex items-center justify-between px-4 py-6 space-x-4">
+                                  <div class="flex items-center">
+                                        <span class="rounded-full relative p-5 bg-yellow-100">
+                                            <svg width="40" fill="currentColor" height="40" class="text-yellow-500 h-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1362 1185q0 153-99.5 263.5t-258.5 136.5v175q0 14-9 23t-23 9h-135q-13 0-22.5-9.5t-9.5-22.5v-175q-66-9-127.5-31t-101.5-44.5-74-48-46.5-37.5-17.5-18q-17-21-2-41l103-135q7-10 23-12 15-2 24 9l2 2q113 99 243 125 37 8 74 8 81 0 142.5-43t61.5-122q0-28-15-53t-33.5-42-58.5-37.5-66-32-80-32.5q-39-16-61.5-25t-61.5-26.5-62.5-31-56.5-35.5-53.5-42.5-43.5-49-35.5-58-21-66.5-8.5-78q0-138 98-242t255-134v-180q0-13 9.5-22.5t22.5-9.5h135q14 0 23 9t9 23v176q57 6 110.5 23t87 33.5 63.5 37.5 39 29 15 14q17 18 5 38l-81 146q-8 15-23 16-14 3-27-7-3-3-14.5-12t-39-26.5-58.5-32-74.5-26-85.5-11.5q-95 0-155 43t-60 111q0 26 8.5 48t29.5 41.5 39.5 33 56 31 60.5 27 70 27.5q53 20 81 31.5t76 35 75.5 42.5 62 50 53 63.5 31.5 76.5 13 94z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                      <p class="text-sm text-gray-700 dark:text-white ml-2 font-semibold border-b border-gray-200">
+                                          valeur des produits
+                                      </p>
+                                  </div>
+                                  <div class="border-b border-gray-200 mt-6 md:mt-0 text-black dark:text-white font-bold text-xl">
+                                      $44,453.39
+
+                                  </div>
+                              </div>
+                              <div class="w-full h-3 bg-gray-100">
+                                  <div class="w-2/5 h-full text-center text-xs text-white bg-green-400">
+                                  </div>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+                  <div class="flex items-center w-full md:w-1/2 space-x-4">
+                      <div class="w-1/2">
+                          <div class="shadow-sm rounded px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                              <p class="text-2xl text-black dark:text-white font-bold">
+                                  12
+                              </p>
+                              <p class="text-gray-400 text-sm">
+                                  nombre des promotions
+                              </p>
+                          </div>
+                      </div>
+                      <div class="w-1/2">
+                          <div class="shadow-sm rounded px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                              <p class="text-2xl text-black dark:text-white font-bold">
+                                  $93.76
+                              </p>
+                              <p class="text-gray-400 text-sm">
+                                  valeur des promotions
+                              </p>
+                          </div>
+                      </div>
                   </div>
               </div>
-          </header>
-      <jsp:include page="/adminGeneral/statistics.jsp"></jsp:include>
-      <jsp:include page="/admin/displayPromo.jsp"></jsp:include>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+                  <div class="w-full">
+                      <div class="shadow-sm rounded px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                          <p class="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                              Multimedia
+                          </p>
+                          <div class="flex items-end space-x-2 my-6">
+                              <p class="text-5xl text-black dark:text-white font-bold">
+                                  12
+                              </p>
+                              <span class="text-green-500 text-xl font-bold flex items-center">
+                                    <svg width="20" fill="currentColor" height="20" class="h-3" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1675 971q0 51-37 90l-75 75q-38 38-91 38-54 0-90-38l-294-293v704q0 52-37.5 84.5t-90.5 32.5h-128q-53 0-90.5-32.5t-37.5-84.5v-704l-294 293q-36 38-90 38t-90-38l-75-75q-38-38-38-90 0-53 38-91l651-651q35-37 90-37 54 0 91 37l651 651q37 39 37 91z">
+                                        </path>
+                                    </svg>
+                                    22%
+                                </span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="w-full">
+                      <div class="shadow-sm rounded px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                          <p class="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                              Charcuterie
+                          </p>
+                          <div class="flex items-end space-x-2 my-6">
+                              <p class="text-5xl text-black dark:text-white font-bold">
+                                  23
+                              </p>
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="w-full">
+                      <div class="shadow-sm rounded px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                          <p class="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                              Textile
+                          </p>
+                          <div class="flex items-end space-x-2 my-6">
+                              <p class="text-5xl text-black dark:text-white font-bold">
+                                  12
+                              </p>
+                          </div>
+
+                      </div>
+                  </div>
+                  <div class="w-full">
+                      <div class="shadow-sm rounded px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                          <p class="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                              Fromagerie
+                          </p>
+                          <div class="flex items-end space-x-2 my-6">
+                              <p class="text-5xl text-black dark:text-white font-bold">
+                                  16
+                              </p>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
 
       </div>
 

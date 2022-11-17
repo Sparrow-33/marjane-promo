@@ -100,7 +100,8 @@
 <main  x-data=" {
        modelOpen: false,
        index : true,
-       alert : true
+       alert : true,
+       action: false
                 }"
        class="bg-gray-50 dark:bg-gray-800 rounded-2xl h-screen  relative ">
 
@@ -113,7 +114,7 @@
              x-transition:leave="transition ease-in duration-200"
              x-transition:leave-start="opacity-100 transform translate-x-0"
              x-transition:leave-end="opacity-0 transform -translate-x-40"
-             x-init="setTimeout(() => alert = false, 3000)"
+             x-init="setTimeout(() => alert = false, 5000)"
              class=" absolute z-50 mt-10 right-20 flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
             <div class="flex items-center justify-center w-12 bg-[#10b981]" style="background: #10b981">
                 <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -133,9 +134,9 @@
     <div :class="{'absolute h-full w-full bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 z-30': modelOpen}"></div>
 
     <div class="flex items-start justify-between ">
-          <jsp:include page="../components/sideBar.jsp"></jsp:include>
+        <jsp:include page="components/sideBar.jsp"></jsp:include>
         <div class="flex flex-col w-full md:space-y-4">
-           <jsp:include page="../components/header.jsp"></jsp:include>
+            <jsp:include page="components/header.jsp"></jsp:include>
             <div style="width: 100%;" class="container w-full md:w-4/5  mx-auto px-2">
 
                 <!--Title-->
@@ -152,7 +153,6 @@
                         <thead style="position: sticky;">
                         <tr>
                             <th data-priority="1">Date de creation</th>
-                            <th data-priority="2">Categorie</th>
                             <th data-priority="3">Produit</th>
                             <th data-priority="4">Prix unitaire DH</th>
                             <th data-priority="5">En promotion DH</th>
@@ -165,28 +165,55 @@
                         <c:forEach var="promotion" items="${promotions}">
                             <tr>
                                 <td>---</td>
-                                <td>${promotion.produitByProduitId.categorieByCategorieId.type}</td>
                                 <td>${promotion.produitByProduitId.label}</td>
                                 <td>${promotion.getProduitByProduitId().getPrix()}</td>
                                 <td>${promotion.getProduitByProduitId().getPrix() - (promotion.getProduitByProduitId().getPrix()* promotion.taux / 100 ) }</td>
                                 <td>${promotion.profit}</td>
                                 <td>${promotion.expired_at}</td>
                                 <td>
-<%--                                    <c:if test="${promotion.status.equals('PEND')}">--%>
-                                    <div style="
-                                    background: <c:if test="${promotion.status.equals('APP')}"> #10b981</c:if>
-                                                <c:if test="${promotion.status.equals('ENC')}"> #0891b2</c:if>
-                                                <c:if test="${promotion.status.equals('NOT')}"> #fde68a</c:if>
-                                                <c:if test="${promotion.status.equals('REJ')}"> #f87171</c:if>;"
-                                    class="flex  w-full max-w-sm overflow-hidden text-white rounded-full py-1">
-                                        <div>
-                                            <div class="mx-3">
-                                                <span style="font-size: 0.6em;" class="font-bold  text-sm">
-                                                    <c:if test="${promotion.status.equals('APP')}"> APPLIQUEE</c:if>
-                                                    <c:if test="${promotion.status.equals('ENC')}"> E.COURS</c:if>
-                                                    <c:if test="${promotion.status.equals('NOT')}"> N.TRAITEE</c:if>
-                                                    <c:if test="${promotion.status.equals('REJ')}"> REJETEE</c:if>
-                                                </span>
+<%--                                    <div style="--%>
+<%--                                            background: <c:if test="${promotion.status.equals('APP')}"> #10b981</c:if>--%>
+<%--                                    <c:if test="${promotion.status.equals('ENC')}"> #0891b2</c:if>--%>
+<%--                                    <c:if test="${promotion.status.equals('NOT')}"> #fde68a</c:if>--%>
+<%--                                    <c:if test="${promotion.status.equals('REJ')}"> #f87171</c:if>;"--%>
+<%--                                         class="flex  w-full max-w-sm overflow-hidden text-white rounded-full py-1">--%>
+<%--                                        <div>--%>
+<%--                                            <div class="mx-3">--%>
+<%--                                                <span style="font-size: 0.6em;" class="font-bold  text-sm">--%>
+<%--                                                    <c:if test="${promotion.status.equals('APP')}"> APPLIQUEE</c:if>--%>
+<%--                                                    <c:if test="${promotion.status.equals('ENC')}"> E.COURS</c:if>--%>
+<%--                                                    <c:if test="${promotion.status.equals('NOT')}"> N.TRAITEE</c:if>--%>
+<%--                                                    <c:if test="${promotion.status.equals('REJ')}"> REJETEE</c:if>--%>
+<%--                                                </span>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+                                    <div class="flex items-center">
+                                        <div class="relative">
+                                        <c:if test="${promotion.status.equals('ENC')}">
+                                            <a href="accept.promo.responsable?promo=${promotion.id}"  class="relative z-10  text-medium mr-4">
+                                                <i  class="fa-solid fa-circle-check text-blue-500 "></i>
+                                            </a>
+
+                                            <a href="decline.promo.responsable?promo=${promotion.id}"  class="relative z-10  text-medium">
+                                            <i style="color: #ef4444;" class="fa-regular fa-circle-xmark"></i>
+                                            </a>
+                                        </c:if>
+
+                                            <div style="
+                                                    background: <c:if test="${promotion.status.equals('APP')}"> #10b981</c:if>
+                                            <c:if test="${promotion.status.equals('NOT')}"> #fde68a</c:if>
+                                            <c:if test="${promotion.status.equals('REJ')}"> #f87171</c:if>;"
+                                                 class="flex  w-full max-w-sm overflow-hidden text-white rounded-full py-1">
+                                                <div>
+                                                    <div class="mx-3">
+                                                        <span style="font-size: 0.6em;" class="font-bold  text-sm">
+                                                            <c:if test="${promotion.status.equals('APP')}"> APPLIQUEE</c:if>
+                                                            <c:if test="${promotion.status.equals('NOT')}"> N.TRAITEE</c:if>
+                                                            <c:if test="${promotion.status.equals('REJ')}"> REJETEE</c:if>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -218,9 +245,7 @@
                 });
             </script>
         </div>
-        <%--  Modal start   --%>
-        <jsp:include page="/admin/createResponsable.jsp"></jsp:include>
-        <%--  Modal end   --%>
+
     </div>
 </main>
 

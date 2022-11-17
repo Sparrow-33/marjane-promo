@@ -28,7 +28,7 @@ public class Responsable {
     private String nom;
     @Basic
     @Column(name = "centreId")
-    private Integer centreId;
+    private Long centreId;
     @ManyToOne
     @JoinColumn(name = "centreId", referencedColumnName = "id",insertable = false, updatable = false)
     private Centre responsableByCentreId;
@@ -43,14 +43,12 @@ public class Responsable {
     public void setId(long id) {
         this.id = id;
     }
-
-    public Integer getCategorieId() {
-        return categorieId;
-    }
-
-    public void setCategorieId(Integer categorieId) {
-        this.categorieId = categorieId;
-    }
+//    public void setCentreId(Integer centreId) {
+//        this.centreId = centreId;
+//    }
+//    public Integer getCentreId() {
+//        return centreId;
+//    }
 
     public String getEmail() {
         return email;

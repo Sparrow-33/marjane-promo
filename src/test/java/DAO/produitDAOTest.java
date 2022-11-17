@@ -18,4 +18,13 @@ class produitDAOTest {
         }
     }
 
+    @Test void getProductByCat() {
+        List<Produit> list =p.getProductsByCategory(1);
+        int i =0;
+        while (i < list.size()) {
+            System.out.println(list.get(i).getCategorieByCategorieId().getType());
+            i++;
+        }
+    }
+
 }

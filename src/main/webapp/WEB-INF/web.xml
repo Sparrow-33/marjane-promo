@@ -13,7 +13,6 @@
         <url-pattern>*.adminGeneral</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Admin</servlet-name>
         <servlet-class>Servlets.Admin</servlet-class>
@@ -21,6 +20,15 @@
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>*.admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Responsable</servlet-name>
+        <servlet-class>Servlets.Responsable</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Responsable</servlet-name>
+        <url-pattern>*.responsable</url-pattern>
     </servlet-mapping>
 
 </web-app>
